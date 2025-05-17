@@ -14,11 +14,11 @@ import sql_execution
 # Use inheritance to add methods
 # for querying the employee_events database.
 # YOUR CODE HERE
-class QueryBase(sql_execution):
+class QueryBase(sql_execution.QueryMixin):
     # Create a class attribute called `name`
     # set the attribute to an empty string
     # YOUR CODE HERE #DONE
-    name = ""
+    name = " "
     # Define a `names` method that receives
     # no passed arguments
     # YOUR CODE HERE #DONE
@@ -35,7 +35,6 @@ class QueryBase(sql_execution):
     # YOUR CODE HERE 
     def event_counts(id):
         df = pd.DataFrame()       
-        # joiningColumn = 
         # QUERY 1
         # Write an SQL query that groups by `event_date`
         # and sums the number of positive and negative events
@@ -46,7 +45,7 @@ class QueryBase(sql_execution):
         # order by the event_date column
         # YOUR CODE HERE #DONE
         
-        connection = sqlite3.connect(sql_execution.db_path)
+        # connection = sqlite3.connect(sql_execution.db_path)
         # cursor =  connection.cursor()
         SQL_query = f""" 
         SELECT 
@@ -59,7 +58,8 @@ class QueryBase(sql_execution):
         """
 
         # cursor.execute(SQL_query)
-        df = pd.read_sql_query(SQL_query, connection)
+        # df = pd.read_sql_query(SQL_query, connection)
+        df = super().pandas_query(SQL_query)
         return df
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
@@ -76,7 +76,7 @@ class QueryBase(sql_execution):
         # so the query returns the notes
         # for the table name in the `name` class attribute
         # YOUR CODE HERE #DONE
-        connection = sqlite3.connect("employee_events.db")
+        # connection = sqlite3.connect("employee_events.db")
         # cursor =  connection.cursor()
         SQL_query = f""" 
         SELECT 
@@ -85,6 +85,7 @@ class QueryBase(sql_execution):
         FROM notes
         """ 
         # cursor.execute(SQL_query)
-        df = pd.read_sql_query(SQL_query, connection)
+        # df = pd.read_sql_query(SQL_query, connection)
+        df = super().pandas_query(SQL_query)
         return df
 

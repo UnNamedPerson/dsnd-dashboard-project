@@ -14,11 +14,11 @@ db_path = Path(__file__).resolve().parent / 'employee_events.db'
 # called  `Team`
 #### YOUR CODE HERE  #DONE
 class Team(query_base):
-    def __init__(self):
-        connection = "asdf"
-    def setter():
-        global connection 
-        connection = connect(db_path)
+    # def __init__(self):
+        # connection = "asdf"
+    # def setter():
+        # global connection 
+        # connection = connect(db_path)
     # Set the class attribute `name`
     # to the string "team"
     #### YOUR CODE HERE #DONE
@@ -37,15 +37,17 @@ class Team(query_base):
         # in the database
         #### YOUR CODE HERE
 
-        cursor =  connection.cursor()
+        # cursor =  connection.cursor()
+
         SQL_query = f""" 
         SELECT 
             team_id,
         FROM employee
         WHERE team_id = {ID}
         """
-        cursor.execute(SQL_query)
-
+        # cursor.execute(SQL_query)
+        query_result = super(query_base, self).query(SQL_query)
+        return query_result
     # Define a `username` method
     # that receives an ID argument
     # This method should return
@@ -61,27 +63,29 @@ class Team(query_base):
         #### YOUR CODE HERE #DONE
 
         # connection = connect(db_path)
-        cursor =  connection.cursor()
+        # cursor =  connection.cursor()
         SQL_query = f""" 
         SELECT 
             team_id,
         FROM employee
         WHERE team_id = {ID}
         """
-        cursor.execute(SQL_query)
-        result_list = cursor.fetchall()
+        # cursor.execute(SQL_query)
+        # result_list = cursor.fetchall()
+        result_list = super(query_base, self).query(SQL_query)
         return result_list
+    
     # Below is method with an SQL query
     # This SQL query generates the data needed for
     # the machine learning model.
     # Without editing the query, alter this method
     # so when it is called, a pandas dataframe
-    # is returns containing the execution of
+    # is returned containing the execution of
     # the sql query
     #### YOUR CODE HERE #DONE
 
     def model_data(self, id):
-        connection = connect(db_path)
+        # connection = connect(db_path)
         # cursor =  connection.cursor()
         SQL_query = f"""
             SELECT positive_events, negative_events FROM (
@@ -95,6 +99,7 @@ class Team(query_base):
                     GROUP BY employee_id
                    )
                 """
-        df = pd.read_sql_query(SQL_query, connection)
-        pd.read_sql
+        # df = pd.read_sql_query(SQL_query, connection)
+        df = super(query_base, self).pandas_query(SQL_query)
+        # pd.read_sql
         return df

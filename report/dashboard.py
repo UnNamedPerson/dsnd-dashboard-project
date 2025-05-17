@@ -4,10 +4,13 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import sys
+
 # Import QueryBase, Employee, Team from employee_events
 #### YOUR CODE HERE #DONE
-from python_package.employee_events import query_base, Employee, Team
-
+project_root = Path().resolve().parent.parent
+sys.path.append(str(project_root))
+from python_package import QueryBase, Employee, Team
 
 # import the load_model function from the utils.py file
 #### YOUR CODE HERE #DONE

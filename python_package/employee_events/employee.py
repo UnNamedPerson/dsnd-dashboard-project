@@ -34,7 +34,7 @@ class Employee(query_base):
         # This query should return the data
         # for all employees in the database
         #### YOUR CODE HERE #DONE
-        connection = connect(sql_execution.db_path)
+        # connection = connect(sql_execution.db_path)
         # cursor =  connection.cursor()
         SQL_query = f""" 
         SELECT 
@@ -45,7 +45,8 @@ class Employee(query_base):
         """
 
         # cursor.execute(SQL_query)
-        df_employee = pd.read_sql_query(SQL_query)
+        # df_employee = pd.read_sql_query(SQL_query)
+        df_employee = super(query_base, self).pandas_query(SQL_query)
         return df_employee
     # Define a method called `username`
     # that receives an `id` argument
@@ -60,9 +61,9 @@ class Employee(query_base):
         # to only return the full name of the employee
         # with an id equal to the id argument
         #### YOUR CODE HERE #DONE
-
-        connection = connect(sql_execution.db_path)
+        # connection = connect(sql_execution.db_path)
         # cursor =  connection.cursor()
+        
         SQL_query = f""" 
         SELECT 
             first_name,
@@ -71,14 +72,16 @@ class Employee(query_base):
         WHERE employee_id = %s
         """ % (id)
         # cursor.execute(SQL_query)
-        df_employee_name = pd.read_sql_query(SQL_query)
+        # df_employee_name = pd.read_sql_query(SQL_query)
+
+        df_employee_name = super(query_base, self).query(SQL_query)
         return df_employee_name
     # Below is method with an SQL query
     # This SQL query generates the data needed for
     # the machine learning model.
     # Without editing the query, alter this method
     # so when it is called, a pandas dataframe
-    # is returns containing the execution of
+    # is returned containing the execution of
     # the sql query
     #### YOUR CODE HERE #DONE
     def model_data(self, id):
@@ -90,6 +93,7 @@ class Employee(query_base):
                         USING({self.name}_id)
                     WHERE {self.name}.{self.name}_id = {id}
                 """
-        df_query_result = pd.read_sql_query(query)
+        # df_query_result = pd.read_sql_query(query)
         # return pd.read_sql_query(query)
+        df_query_result = super(query_base, self).pandas_query(query)
         return df_query_result
